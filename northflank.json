@@ -52,75 +52,83 @@
           }
         },
         {
-          "kind": "DeploymentService",
+          "kind": "Workflow",
           "spec": {
-            "name": "api",
-            "billing": {
-              "deploymentPlan": "nf-compute-50"
-            },
-            "deployment": {
-              "internal": {
-                "id": "api-builder",
-                "branch": "main",
-                "buildSHA": "latest"
-              },
-              "docker": {
-                "configType": "default"
-              },
-              "instances": 1
-            },
-            "ports": [
+            "type": "parallel",
+            "steps": [
               {
-                "name": "p01",
-                "internalPort": 3001,
-                "public": true,
-                "protocol": "HTTP",
-                "security": {
-                  "credentials": [],
-                  "policies": []
-                },
-                "domains": [],
-                "disableNfDomain": false
-              }
-            ],
-            "description": "",
-            "runtimeEnvironment": {}
-          }
-        },
-        {
-          "kind": "DeploymentService",
-          "spec": {
-            "name": "web",
-            "billing": {
-              "deploymentPlan": "nf-compute-50"
-            },
-            "deployment": {
-              "internal": {
-                "id": "web-builder",
-                "branch": "main",
-                "buildSHA": "latest"
+                "kind": "DeploymentService",
+                "spec": {
+                  "name": "api",
+                  "billing": {
+                    "deploymentPlan": "nf-compute-50"
+                  },
+                  "deployment": {
+                    "internal": {
+                      "id": "api-builder",
+                      "branch": "main",
+                      "buildSHA": "latest"
+                    },
+                    "docker": {
+                      "configType": "default"
+                    },
+                    "instances": 1
+                  },
+                  "ports": [
+                    {
+                      "name": "p01",
+                      "internalPort": 3001,
+                      "public": true,
+                      "protocol": "HTTP",
+                      "security": {
+                        "credentials": [],
+                        "policies": []
+                      },
+                      "domains": [],
+                      "disableNfDomain": false
+                    }
+                  ],
+                  "description": "",
+                  "runtimeEnvironment": {}
+                }
               },
-              "docker": {
-                "configType": "default"
-              },
-              "instances": 1
-            },
-            "ports": [
               {
-                "name": "p01",
-                "internalPort": 3000,
-                "public": true,
-                "protocol": "HTTP",
-                "security": {
-                  "credentials": [],
-                  "policies": []
-                },
-                "domains": [],
-                "disableNfDomain": false
+                "kind": "DeploymentService",
+                "spec": {
+                  "name": "web",
+                  "billing": {
+                    "deploymentPlan": "nf-compute-50"
+                  },
+                  "deployment": {
+                    "internal": {
+                      "id": "web-builder",
+                      "branch": "main",
+                      "buildSHA": "latest"
+                    },
+                    "docker": {
+                      "configType": "default"
+                    },
+                    "instances": 1
+                  },
+                  "ports": [
+                    {
+                      "name": "p01",
+                      "internalPort": 3000,
+                      "public": true,
+                      "protocol": "HTTP",
+                      "security": {
+                        "credentials": [],
+                        "policies": []
+                      },
+                      "domains": [],
+                      "disableNfDomain": false
+                    }
+                  ],
+                  "description": "",
+                  "runtimeEnvironment": {}
+                }
               }
-            ],
-            "description": "",
-            "runtimeEnvironment": {}
+            ]
           }
         }
       ]
