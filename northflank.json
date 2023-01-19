@@ -1,0 +1,68 @@
+{
+  "apiVersion": "v1",
+  "spec": {
+    "kind": "Workflow",
+    "spec": {
+      "type": "parallel",
+      "steps": [
+        {
+          "kind": "BuildService",
+          "spec": {
+            "name": "api-builder",
+            "billing": {
+              "deploymentPlan": "nf-compute-50"
+            },
+            "vcsData": {
+              "projectUrl": "https://github.com/northflank/turbo-template-release",
+              "projectType": "github"
+            },
+            "buildSettings": {
+              "dockerfile": {
+                "buildEngine": "kaniko",
+                "dockerFilePath": "/apps/api/Dockerfile",
+                "dockerWorkDir": "/",
+                "useCache": true
+              }
+            },
+            "description": "",
+            "buildArguments": {}
+          }
+        },
+        {
+          "kind": "BuildService",
+          "spec": {
+            "name": "web-builder",
+            "billing": {
+              "deploymentPlan": "nf-compute-50"
+            },
+            "vcsData": {
+              "projectUrl": "https://github.com/northflank/turbo-template-release",
+              "projectType": "github"
+            },
+            "buildSettings": {
+              "dockerfile": {
+                "buildEngine": "kaniko",
+                "dockerFilePath": "/apps/webDockerfile",
+                "dockerWorkDir": "/",
+                "useCache": true
+              }
+            },
+            "description": "",
+            "buildArguments": {}
+          }
+        }
+      ]
+    }
+  },
+  "name": "turbo-template-release",
+  "description": "",
+  "project": {
+    "spec": {
+      "name": "turbo-template-release",
+      "region": "europe-west",
+      "color": "#EF233C",
+      "description": ""
+    }
+  },
+  "$schema": "https://api.northflank.com/v1/schemas/template"
+}
