@@ -42,7 +42,7 @@
             "buildSettings": {
               "dockerfile": {
                 "buildEngine": "kaniko",
-                "dockerFilePath": "/apps/webDockerfile",
+                "dockerFilePath": "/apps/web/Dockerfile",
                 "dockerWorkDir": "/",
                 "useCache": true
               }
