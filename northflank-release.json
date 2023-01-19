@@ -1,0 +1,76 @@
+{
+  "apiVersion": "v1",
+  "spec": {
+    "kind": "Workflow",
+    "spec": {
+      "type": "sequential",
+      "steps": [
+        {
+          "kind": "Workflow",
+          "spec": {
+            "type": "parallel",
+            "steps": [
+              {
+                "kind": "Build",
+                "spec": {
+                  "id": "api-builder",
+                  "type": "service",
+                  "branch": "main"
+                },
+                "condition": "success"
+              },
+              {
+                "kind": "Build",
+                "spec": {
+                  "id": "web-builder",
+                  "type": "service",
+                  "branch": "main"
+                },
+                "condition": "success"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "Workflow",
+          "spec": {
+            "type": "parallel",
+            "steps": [
+              {
+                "kind": "Release",
+                "spec": {
+                  "type": "build",
+                  "origin": {
+                    "id": "api-builder",
+                    "branch": "main",
+                    "build": "latest"
+                  },
+                  "target": {
+                    "id": "api",
+                    "type": "service"
+                  }
+                }
+              },
+              {
+                "kind": "Release",
+                "spec": {
+                  "type": "build",
+                  "origin": {
+                    "id": "web-builder",
+                    "branch": "main",
+                    "build": "latest"
+                  },
+                  "target": {
+                    "id": "web",
+                    "type": "service"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "$schema": "https://api.northflank.com/v1/schemas/release-flow"
+}
