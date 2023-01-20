@@ -10,7 +10,7 @@
           "spec": {
             "name": "api-builder",
             "billing": {
-              "deploymentPlan": "nf-compute-50"
+              "deploymentPlan": "nf-compute-20"
             },
             "vcsData": {
               "projectUrl": "https://github.com/northflank/turbo-template-release",
@@ -72,7 +72,8 @@
                     "docker": {
                       "configType": "default"
                     },
-                    "instances": 1
+                    "instances": 1,
+                    "releaseFlowControlled": true
                   },
                   "ports": [
                     {
@@ -108,7 +109,8 @@
                     "docker": {
                       "configType": "default"
                     },
-                    "instances": 1
+                    "instances": 1,
+                    "releaseFlowControlled": true
                   },
                   "ports": [
                     {
